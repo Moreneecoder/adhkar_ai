@@ -23,7 +23,7 @@ class OpenAiClient
       }.to_json
 
       headers = {
-        "Authorization" => "Bearer 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",
+        "Authorization" => "Bearer #{ENV["OPENAI_SECRET_KEY"]}",
         "Content-Type" => "application/json"
       }
 
