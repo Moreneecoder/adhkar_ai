@@ -1,0 +1,42 @@
+databases:
+  - name: postgres
+    ipAllowList: []
+
+services:
+  - type: web
+    name: rails
+    env: ruby
+    buildCommand: ./bin/render-build.sh
+    startCommand: bundle exec puma -C config/puma.rb
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: OPENAI_SECRET_KEY
+        sync: false
+      - key: TELEGRAM_API_KEY
+        sync: false
+  
+
+  - type: redis
+    name: redis
+    ipAllowList: []
+    plan: free
+    maxmemoryPolicy: noeviction
+
+  - type: worker
+    name: adhkar-ai-worker-1
+    env: ruby
+    region: oregon
+    plan: free
+    buildCommand: bundle install
+    startCommand: bundle exec rails runner app/integrations/start_bot.rb
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: buycoins-core-staging-redis
+          property: connectionString
+      - key: DATABASE_URL
+        fromDatabase:
+          name: buycoins-core_development
+          property: connectionString

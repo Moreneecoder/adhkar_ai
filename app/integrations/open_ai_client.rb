@@ -44,7 +44,7 @@ class OpenAiClient
     def respond(response)
       return unless block_given?
   
-      body = JSON.parse(response.body)
+      p body = JSON.parse(response.body)
       unless response.code == 200
         return create_response(success: false, error_message: body["message"])
       end
