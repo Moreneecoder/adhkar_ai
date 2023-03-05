@@ -9,7 +9,7 @@ services:
     env: ruby
     plan: free
     buildCommand: ./bin/render-build.sh
-    startCommand: bundle exec puma -C config/puma.rb; bundle exec rails runner bin/start_bot.rb
+    startCommand: bundle exec puma -C config/puma.rb && bundle exec rails runner bin/start_bot.rb
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
