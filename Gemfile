@@ -42,8 +42,13 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-#http request
+# http request
 gem "httparty"
+
+# Telegram bot Api
+gem "telegram-bot-ruby"
+
+gem 'recursive-open-struct'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

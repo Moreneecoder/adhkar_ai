@@ -4,7 +4,7 @@ class OpenAiClient
   base_uri "https://api.openai.com/v1"
 
   class << self
-    def ask
+    def ask(question)
       body = {
         model: "gpt-3.5-turbo",
         messages: [
@@ -17,7 +17,7 @@ class OpenAiClient
           },
           {
             "role": "user",
-            "content": "I got a job!"
+            "content": question
           }
         ]
       }.to_json
@@ -27,7 +27,37 @@ class OpenAiClient
         "Content-Type" => "application/json"
       }
 
-      response = post("/chat/completions", body: body, headers: headers)      
+      response = post("/chat/completions", body: body, headers: headers)
+
+      respond(response) do |data|
+        create_response(
+          data: {
+            role: data["role"],
+            reply: data["content"]
+          }
+        )
+      end
+    end
+
+    private
+
+    def respond(response)
+      return unless block_given?
+  
+      body = JSON.parse(response.body)
+      unless response.code == 200
+        return create_response(success: false, error_message: body["message"])
+      end
+      
+      yield(body["choices"][0]["message"])
+    end
+
+    def create_response(success: true, data: nil, error_message: nil)
+      ::RecursiveOpenStruct.new(
+        success?: success,
+        result: data,
+        error_message: error_message
+      )
     end
   end
 end
