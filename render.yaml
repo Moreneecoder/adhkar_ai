@@ -32,13 +32,3 @@ services:
     plan: free
     buildCommand: bundle install
     startCommand: bundle exec rails runner app/integrations/start_bot.rb
-    envVars:
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: buycoins-core-staging-redis
-          property: connectionString
-      - key: DATABASE_URL
-        fromDatabase:
-          name: buycoins-core_development
-          property: connectionString
