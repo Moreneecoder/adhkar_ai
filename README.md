@@ -62,3 +62,7 @@ Feel free to check the [issues page](https://github.com/Moreneecoder/adhkar_ai/i
 ## Show your support
 
 Give a ⭐️ if you like this project!
+
+This project is [MIT](./LICENSE) licensed.
+
+https://github.com/Moreneecoder/adhkar_ai/blob/main/LICENSE
