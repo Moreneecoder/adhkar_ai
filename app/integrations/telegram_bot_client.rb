@@ -42,5 +42,3 @@ class TelegramBotClient
     end
   end
 end
-
-TelegramBotClient.start
