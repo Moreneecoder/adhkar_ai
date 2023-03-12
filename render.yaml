@@ -25,10 +25,10 @@ services:
     plan: free
     maxmemoryPolicy: noeviction
 
-  # - type: worker
-  #   name: adhkar-ai-worker-1
-  #   env: ruby
-  #   region: oregon
-  #   plan: free
-  #   buildCommand: bundle install
-  #   startCommand: bundle exec rails runner app/integrations/start_bot.rb
+  - type: worker
+    name: adhkar-ai-worker-1
+    env: ruby
+    region: oregon
+    plan: free
+    buildCommand: bundle install
+    startCommand: bundle exec rails runner app/integrations/telegram_bot_client.rb
