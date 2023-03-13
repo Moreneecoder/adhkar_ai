@@ -17,7 +17,7 @@ class TelegramBotClient
     def listen(bot)
       bot.listen do |message|
           begin
-            p message.text           
+            p message.text if message.respond_to?(:text) && !message.text.nil?
             process_message(bot, message) if message.respond_to?(:text) && !message.text.nil?
           rescue HTTParty::Error, SocketError => e
             puts "I'm so sorry. I'm having an issue with processing your request at the moment. Please try again in a short while."
