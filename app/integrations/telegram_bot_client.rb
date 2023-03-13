@@ -21,6 +21,9 @@ class TelegramBotClient
             process_message(bot, message) if message.respond_to?(:text) && !message.text.nil?
           rescue HTTParty::Error, SocketError => e
             puts "I'm so sorry. I'm having an issue with processing your request at the moment. Please try again in a short while."
+          rescue Telegram::Bot::Exceptions::ResponseError => e
+            puts e
+            puts "Telegram response error."
           end                                
       end
     end
