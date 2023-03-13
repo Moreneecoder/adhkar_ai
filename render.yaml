@@ -29,6 +29,6 @@ services:
     name: adhkar-ai-worker-1
     env: ruby
     region: oregon
-    plan: free
+    plan: starter
     buildCommand: bundle install
-    startCommand: bundle exec rails runner app/integrations/telegram_bot_client.rb
+    startCommand: bundle exec rails runner bin/start_bot.rb
